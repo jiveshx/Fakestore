@@ -28,19 +28,19 @@ export default function CardBoard() {
 
         <div id="item-box" className="container-fluid m-auto">
           {loading ? (
-            data.map((product, index) => {
-                return (
-                  <Card
-                    key={index}
-                    image={product.image}
-                    title={product.title}
-                    category={product.category}
-                    price={product.price}
-                    description={product.description}
-                    url={product.url}
-                  />
-                );
-              })
+            data.map((product) => {
+              return (
+                <Card
+                  key={product.id} // Use product.id as key to ensure uniqueness
+                  id={product.id} // Pass id to Card
+                  image={product.image}
+                  title={product.title}
+                  category={product.category}
+                  price={product.price}
+                  description={product.description}
+                />
+              );
+            })
           ) : (
             <div
               className="spinner-border d-flex justify-content-center"
@@ -51,7 +51,7 @@ export default function CardBoard() {
           )}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

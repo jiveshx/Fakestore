@@ -6,6 +6,7 @@ import ApiPage from "./pages/ApiPage";
 import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
 import Table from "./pages/Table";
+import ProductDetailPage from "./pages/ProductPage";
 
 function App(products) {
   
@@ -109,6 +110,7 @@ function App(products) {
           <Route path="/contact" element={<Contact />} />
           <Route path="/table" element={<Table />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/product/:id" element={<ProductDetailPage />}/>
         </Routes>
       </div>
     </Router>
