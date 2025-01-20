@@ -1,0 +1,39 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+#item-box {
+  display: grid;
+  grid-template-columns: auto;
+}
+#img {
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  
+}
+@media (max-width: 576px) {
+  #item-box{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+  }
+}
+@media (min-width: 768px) {
+  #item-box{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+@media (min-width: 992px) {
+  #item-box{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+@media (min-width: 1200px) {
+  #item-box{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+  }
+}
+
