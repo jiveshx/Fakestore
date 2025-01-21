@@ -1,33 +1,34 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import ApiPage from "./pages/ApiPage";
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import Home from "../pages/Home";
+import About from "../pages/About";
+import ApiPage from "../pages/ApiPage";
 // import NotFound from "./pages/NotFound";
-import Contact from "./pages/Contact";
-import Table from "./pages/Table";
-import ProductDetailPage from "./pages/ProductPage";
+import Contact from "../pages/Contact";
+import Table from "../pages/Table";
+import ProductDetailPage from "../pages/ProductPage";
 
-function App(products) {
-  
+
+export default function Navbar(products) {
+
     const [searchTerm, setSearchTerm] = useState("");
-    const [filteredProducts, setFilteredProducts] = useState([]);
-  
-    // Handle search input change
-    const handleSearchChange = (event) => {
-      const value = event.target.value;
-      setSearchTerm(value);
-  
-      // Filter products based on the search term
-      if (value) {
-        const suggestions = products.filter((product) =>
-          product.toLowerCase().includes(value.toLowerCase())
-        );
-        setFilteredProducts(suggestions);
-      } else {
-        setFilteredProducts([]);
-      }
-    };
+        const [filteredProducts, setFilteredProducts] = useState([]);
+      
+        // Handle search input change
+        const handleSearchChange = (event) => {
+          const value = event.target.value;
+          setSearchTerm(value);
+      
+          // Filter products based on the search term
+          if (value) {
+            const suggestions = products.filter((product) =>
+              product.toLowerCase().includes(value.toLowerCase())
+            );
+            setFilteredProducts(suggestions);
+          } else {
+            setFilteredProducts([]);
+          }
+        };
   return (
     <Router>
       <nav id="navi" className="navbar navbar-expand-lg bg-info p-3">
@@ -102,7 +103,6 @@ function App(products) {
           </div>
         </div>
       </nav>
-      {/* <Home/> */}
       <div className="container mt-4">
         <Routes>
           <Route path="/" element={<Home />} exact />
@@ -115,8 +115,5 @@ function App(products) {
         </Routes>
       </div>
     </Router>
-
-  );
+  )
 }
-
-export default App;

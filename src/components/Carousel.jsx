@@ -27,13 +27,13 @@ function Carousel() {
       </div>
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src="/src/assets/Property 1=Frame 811.png" className="d-block w-100" alt="..." />
+          <img src="./src/assets/Cimage1.png" className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src="/src/assets/Property 1=Frame 812.png" className="d-block w-100" alt="..." />
+          <img src="./src/assets/Cimage2.png" className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src="/src/assets/Property 1=Frame 813.png" className="d-block w-100" alt="..." />
+          <img src="./src/assets/Cimage3.png" className="d-block w-100" alt="..." />
         </div>
       </div>
       <button
