@@ -1,4 +1,7 @@
 // import React from 'react'
+import Cimage1 from "../assets/Cimage1.png";
+import Cimage2 from "../assets/Cimage2.png";
+import Cimage3 from "../assets/Cimage3.png";
 
 function Carousel() {
   return (
@@ -27,13 +30,13 @@ function Carousel() {
       </div>
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src="./src/assets/Cimage1.png" className="d-block w-100" alt="..." />
+          <img src={Cimage1} className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src="./src/assets/Cimage2.png" className="d-block w-100" alt="..." />
+          <img src={Cimage2} className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src="./src/assets/Cimage3.png" className="d-block w-100" alt="..." />
+          <img src={Cimage3} className="d-block w-100" alt="..." />
         </div>
       </div>
       <button
