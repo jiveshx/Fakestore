@@ -27,13 +27,13 @@ function Carousel() {
       </div>
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src="https://www.tutorialrepublic.com/lib/images/bootstrap-5/bootstrap-carousel-dark.png" className="d-block w-100" alt="..." />
+          <img src="/src/assets/Property 1=Frame 811.png" className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src="https://www.tutorialrepublic.com/lib/images/bootstrap-5/bootstrap-carousel-dark.png" className="d-block w-100" alt="..." />
+          <img src="/src/assets/Property 1=Frame 812.png" className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src="https://www.tutorialrepublic.com/lib/images/bootstrap-5/bootstrap-carousel-dark.png" className="d-block w-100" alt="..." />
+          <img src="/src/assets/Property 1=Frame 813.png" className="d-block w-100" alt="..." />
         </div>
       </div>
       <button
