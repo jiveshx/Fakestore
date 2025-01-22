@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import ApiPage from "./pages/ApiPage";
@@ -29,8 +29,8 @@ function App(products) {
       }
     };
   return (
-    <Router>
-      <nav id="navi" className="navbar navbar-expand-lg bg-info p-3">
+    <Router basename="/fakestore">
+      <nav id="navi" className="navbar navbar-expand-lg p-3">
         <div className="container-fluid">
           <Link className="navbar-brand badge bg-danger text-light fs-4" to="/">
             FakeStore
@@ -49,24 +49,24 @@ function App(products) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link text-dark fw-semibold" to="/api">
+                <NavLink className="nav-link text-white fw-semibold" to="/api">
                   Shop
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-dark fw-semibold" to="/about">
+                <NavLink className="nav-link text-white fw-semibold" to="/about">
                   About
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-dark fw-semibold" to="/table">
+                <NavLink className="nav-link text-white fw-semibold" to="/table">
                   Table
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-dark fw-semibold" to="/contact">
+                <NavLink className="nav-link text-white fw-semibold" to="/contact">
                   Contact Us
-                </Link>
+                </NavLink>
               </li>
             </ul>
             <div className="d-flex position-relative">
@@ -78,7 +78,7 @@ function App(products) {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-              <button className="btn btn-outline-success" type="button">
+              <button className="btn btn-outline-warning" type="button">
                 Search
               </button>
               {filteredProducts.length > 0 && (
@@ -103,7 +103,7 @@ function App(products) {
         </div>
       </nav>
       {/* <Home/> */}
-      <div className="container mt-4">
+      <div className="container-fluid p-2">
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/about" element={<About />} />
