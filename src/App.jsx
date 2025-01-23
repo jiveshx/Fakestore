@@ -1,5 +1,11 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, NavLink, Link } from "react-router-dom";
+import   { useState , Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+  Link,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import ApiPage from "./pages/ApiPage";
@@ -7,27 +13,28 @@ import ApiPage from "./pages/ApiPage";
 import Contact from "./pages/Contact";
 import Table from "./pages/Table";
 import ProductDetailPage from "./pages/ProductPage";
+import CartSummary from "./pages/Cart";
+// import LazyComp from "./pages/LazyComp";
 
 function App(products) {
-  
-    const [searchTerm, setSearchTerm] = useState("");
-    const [filteredProducts, setFilteredProducts] = useState([]);
-  
-    // Handle search input change
-    const handleSearchChange = (event) => {
-      const value = event.target.value;
-      setSearchTerm(value);
-  
-      // Filter products based on the search term
-      if (value) {
-        const suggestions = products.filter((product) =>
-          product.toLowerCase().includes(value.toLowerCase())
-        );
-        setFilteredProducts(suggestions);
-      } else {
-        setFilteredProducts([]);
-      }
-    };
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+
+    // Filter products based on the search term
+    if (value) {
+      const suggestions = products.filter((product) =>
+        product.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredProducts(suggestions);
+    } else {
+      setFilteredProducts([]);
+    }
+  };
   return (
     <Router basename="/fakestore">
       <nav id="navi" className="navbar navbar-expand-lg p-3">
@@ -54,22 +61,31 @@ function App(products) {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white fw-semibold" to="/about">
+                <NavLink
+                  className="nav-link text-white fw-semibold"
+                  to="/about"
+                >
                   About
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white fw-semibold" to="/table">
+                <NavLink
+                  className="nav-link text-white fw-semibold"
+                  to="/table"
+                >
                   Table
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white fw-semibold" to="/contact">
+                <NavLink
+                  className="nav-link text-white fw-semibold"
+                  to="/contact"
+                >
                   Contact Us
                 </NavLink>
               </li>
             </ul>
-            <div className="d-flex position-relative">
+            <div className="d-flex position-relative ">
               <input
                 className="form-control me-2"
                 type="text"
@@ -80,6 +96,14 @@ function App(products) {
               />
               <button className="btn btn-outline-warning" type="button">
                 Search
+              </button>
+              <button type="button" className="btn btn-danger fw-semibold mx-2">
+                <NavLink
+                  to={"/cart/:id"}
+                  className="text-white nav-link"
+                >
+                  Cart
+                </NavLink>
               </button>
               {filteredProducts.length > 0 && (
                 <ul
@@ -111,11 +135,14 @@ function App(products) {
           <Route path="/contact" element={<Contact />} />
           <Route path="/table" element={<Table />} />
           {/* <Route path="*" element={<NotFound />} /> */}
-          <Route path="/product/:id" element={<ProductDetailPage />}/>
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/cart/:id" element={<CartSummary />} />
+          {/* <Suspense fallback={<div>Loading...</div>}>
+            <Route path="/lazyComp" element={<LazyComponent/>}/>
+          </Suspense> */}
         </Routes>
       </div>
     </Router>
-
   );
 }
 

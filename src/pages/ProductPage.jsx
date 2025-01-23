@@ -1,13 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Testimonials from '../components/Testimonials';
-import Footer from '../components/Footer';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Testimonials from "../components/Testimonials";
+import Footer from "../components/Footer";
+// import Cart from "./Cart";
 
 const ProductDetailPage = () => {
   const { id } = useParams(); // Get the product ID from the URL
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [suggestions, setSuggestions] = useState([]);
+
+  const Navigate = useNavigate();
 
   useEffect(() => {
     // Fetch product data from the API
@@ -16,12 +19,14 @@ const ProductDetailPage = () => {
       .then((data) => {
         setProduct(data);
         setLoading(false);
-        
+
         // Fetch product suggestions based on category
         fetch(`https://fakestoreapi.com/products/category/${data.category}`)
           .then((res) => res.json())
           .then((suggestedProducts) => {
-            setSuggestions(suggestedProducts.filter(product => product.id !== data.id)); // Exclude current product
+            setSuggestions(
+              suggestedProducts.filter((product) => product.id !== data.id)
+            ); // Exclude current product
           });
       })
       .catch((error) => {
@@ -46,7 +51,7 @@ const ProductDetailPage = () => {
             src={product.image}
             alt={product.title}
             className="img-fluid"
-            style={{ maxHeight: '500px', objectFit: 'contain' }}
+            style={{ maxHeight: "500px", objectFit: "contain" }}
           />
         </div>
         <div className="col-md-6">
@@ -58,21 +63,55 @@ const ProductDetailPage = () => {
             <span className="badge bg-dark">{product.rating.rate}⭐</span>
             <span className="ms-2">{product.rating.count} reviews</span>
           </div>
-          <button className="btn btn-warning mt-3 w-100">Add to Cart</button>
+          <button
+            onClick={() => {
+              const existingCart =
+                JSON.parse(localStorage.getItem("cart")) || [];
+              const existingItem = existingCart.find(
+                (item) => item.id === product.id
+              );
+
+              Navigate('/cart/:id');
+
+              let updatedCart;
+              if (existingItem) {
+                updatedCart = existingCart.map((item) =>
+                  item.id === product.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+                );
+              } else {
+                updatedCart = [...existingCart, { ...product, quantity: 1 }];
+              }
+
+              localStorage.setItem("cart", JSON.stringify(updatedCart));
+              alert("Product added to cart!");
+            }}
+            className="btn btn-warning mt-3 w-100"
+
+          >
+            Add to Cart
+          </button>
+
           <button className="btn btn-dark mt-3 w-100">Buy Now</button>
           <div className="mt-4">
             <h5>More Information</h5>
-            <p><strong>Shipping:</strong> Delivery within 5-7 business days.</p>
-            <p><strong>Return Policy:</strong> 30-day return policy. Terms and conditions apply.</p>
-            <p><strong>Warranty:</strong> 1-year warranty on all parts.</p>
+            <p>
+              <strong>Shipping:</strong> Delivery within 5-7 business days.
+            </p>
+            <p>
+              <strong>Return Policy:</strong> 30-day return policy. Terms and
+              conditions apply.
+            </p>
+            <p>
+              <strong>Warranty:</strong> 1-year warranty on all parts.
+            </p>
           </div>
         </div>
-        
       </div>
-      
 
       {/* Testimonials Section */}
-      <Testimonials/>
+      <Testimonials />
 
       {/* Product Suggestions Section */}
       <div className="mt-5">
@@ -85,22 +124,33 @@ const ProductDetailPage = () => {
                   src={suggestedProduct.image}
                   className="card-img-top"
                   alt={suggestedProduct.title}
-                  style={{ height: '200px', objectFit: 'contain' }}
+                  style={{ height: "200px", objectFit: "contain" }}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{suggestedProduct.title.slice(0, 20)}</h5>
+                  <h5 className="card-title">
+                    {suggestedProduct.title.slice(0, 20)}
+                  </h5>
                   <p className="card-text fs-6 text-muted">
-          {suggestedProduct.description ? suggestedProduct.description.slice(0, 60) : "No description available"}
-        </p>
-                  <h3 className="text-danger mt-3">₹{suggestedProduct.price}</h3>
-                  <a href={`/product/${suggestedProduct.id}`} className="btn btn-warning w-100 mt-2">View Product</a>
+                    {suggestedProduct.description
+                      ? suggestedProduct.description.slice(0, 60)
+                      : "No description available"}
+                  </p>
+                  <h3 className="text-danger mt-3">
+                    ₹{suggestedProduct.price}
+                  </h3>
+                  <a
+                    href={`/product/${suggestedProduct.id}`}
+                    className="btn btn-warning w-100 mt-2"
+                  >
+                    View Product
+                  </a>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <Footer className="mt-4"/>
+      <Footer className="mt-4" />
     </div>
   );
 };
